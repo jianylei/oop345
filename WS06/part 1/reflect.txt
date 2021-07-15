@@ -1,0 +1,18 @@
+Danny Lei - 164700197
+OOP345 - WS6
+07/11/21
+
+--1--
+Though a vector automatically destroys  the pointers it creates when its lifetime ends - it does not do the same for the dynamically allocated memory created by the user (code example: tmp = new Car(sstream) and tmp = new Racecar(sstream);) so we are responsible for deallocating that memory before the pointers the vectors hold are to be destroyed in order to prevent memory leakage.
+Ex.
+Autoshop::~Autoshop() {
+        for(auto& i : m_vehicles){
+            delete i;
+        }
+    }
+
+--2--
+There are multiple error handlers implemented in the loadData() function used to detect errors. The first handler is responsible for validation of the file name. The other handlers are responsible for data validation, such as correct type(car or racecar), the correct state(new, used broken), and also if any data itself is invalid(expecting numbers but file shows letters/strings). Another way of implementing the error handling could be to handle all the errors within the module responsible for reading the file itself rather than the loadData() function.
+
+--3--
+No - In the current version of our code we would not be able to substitute Vehicle* with Vehicle for the list and vectors as vehicle is an abstract base class, which cannot be instantiated and will cause compiler errors.

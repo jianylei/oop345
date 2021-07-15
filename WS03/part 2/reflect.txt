@@ -1,0 +1,31 @@
+Danny Lei - 164700197
+OOP345 - WS3
+06/05/21
+
+Through this workshop I was able to familiarize myself with the use of templates along with specialization. This workshop dealt with having a templated class nested within a templated class, and it was a good experience to be able to get things to work as I faced some difficulty when it came implementing it - such as with syntax/concept itself, defining the static class member variables, and specialization. After looking at examples online and playing around with the syntax a bit in vscode, I was able to apply what I learned into this workshop and get things to work the best that I can understand it.
+
+1) The reason for specializing templated member functions is to set special instructions/exceptions for specific data types. In our code we were required to specialize the += operator as the previously overloaded version would not be compatible (though it would still work duet to std::string having overloaded =) for string types. Instead of simply adding the value of obj.a to obj.b, for string types we also want to concatenate a separator (", ") between to two strings.
+
+Ex:
+String types with original overloaded function:
+tomatoeslettucepotatoesmeat
+
+Using specialized function:
+tomatoes, lettuce, potatoes, meat
+
+2) We do not need to specialize for the value of initial in this particular example of our workshop because if the type of initial ends up because a string, we can use its default constructor to create an empty string; if the type is an int, short, long, or even a double - it will default to 0 or 0.0 as it is a static value. We only need to define the static variables outside of the templated class.
+
+Ex:
+template<typename V, typename K>
+	V PairSummable<V, K>::initial;
+
+3) The reason that we need to define the variables outside of the class is because since they are static - we would need to allocate memory for them at compile time.
+
+4)
+Explain in the reflection why we do not split a module into *.h and *.cpp like you did in the previous workshops:
+
+This is because templates are instantiated at compile time in which different translation units do not have access/"know of" each other until linkage, thus all the information must be put inside the header files.
+
+Explain in the reflection what = initial in the prototype means:
+
+Initial refers to the static templated variable. If we attempt to instantiate pairSummable with only one argument, the second argument/"value" will default to be initial.

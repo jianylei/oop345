@@ -1,0 +1,38 @@
+Danny Lei - 164700197
+OOP345 - WS5
+06/29/21
+
+Through this workshop I was able to apply/ deepen my understanding of the concepts of different functions(functors, function pointers, lambdas), as well as error handling that was taught this week.
+
+A functor is a function object or more simply an object that acts as a function. It basically is a class that also defines the operator(). Unlike traditional functions, a functor can hold a state which allows for more flexible, complex, and customizable code. An example of a functor within my code for ws05 would be the SpellChecker module. Our functor holds a "state" or value for various bad and good words where it would then be used within its logic to replace the bad for the good words in a given string.
+
+Lambda functions are functors - just defined using shorter syntax, thus limiting their capabilities, but provide much simpler code. Lambdas would be preferred over functors in situations where the functions are not repeated outside its scope or if the problem does not require a complex solution that is outside the capabilities of using a lambda function. Examples of lambda within my code would be:
+
+    auto trimWS = [=](std::string str) {
+                str = str.substr(str.find_first_not_of(" \t\f\n\v\r"));
+                str = str.substr(0, str.find_last_not_of(" \t\f\n\v\r")+1);
+                return str;
+    };
+
+In this workshop, we also dealt with error handling with the use of exceptions. If we were to NOT use exceptions, we would need to return some sort of message back to the user or even a simply boolean value, and exit out of the function before it has a chance to run with the possibility of errors. In the case of the SpellChecker constructor, we would need to set all the values to either 0 or nullptr if an error is detected - along with a "cout" to let the user know that the value was invalid, else continue with the constructor. The benefits of using exceptions include making your code look simpler, and overall much less likely to run into errors.
+
+Due to both the Book and Movie modules having similar logic in loading data, we can redesign the classes to be more efficient using different ways, such as having it be one class and using enums to distinguish which type it is(book or movie), making it one templated class, or even creating a base class that would contain all the variables shared by the two and have the book and movie modules derive from it.
+Ex:
+	class base{
+		std::string m_title;
+		size_t year { 0 };
+		....
+	} 
+
+	class book:public base{
+		std::string m_author;
+		....
+	}
+
+	class movie:public base{
+		....
+	}
+
+Is the book/movie default constructor required?
+Yes, in this case it would be as if we were to remove them, it would cause errors within our program. A work-around to this would be to modify the constructors for those modules to include default values, THEN we can remove the default constructors.
+

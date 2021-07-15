@@ -1,0 +1,24 @@
+Danny Lei - 164700197
+OOP345 - WS4
+06/18/21
+
+Through this workshop I learned about and also got the chance to implement classes of composition and aggregation relationships. In short we can think of it as such: in a composition relationship, obj_a and obj_b are dependant of each other. obj_a will have complete ownership over obj_b and will be responsible for its creation and also destruction before its own; the lifetime of obj_b ends once obj_a is destroyed. Obj_a is also dependant of obj_b in a sense that it is "not complete" without obj_b. Though composition is less coupled than inheritance, it is still not as flexible as an aggregative relationship.
+
+Unlike composition, an aggregation relationship is more-so like borrowing than owning - if obj_a dies, obj_b can continue to live on; these two objects are not dependant of each other. 
+
+In the case of copy/move semantics, the implementation between classes of both relationships are similar - main difference being that with aggregation, you would typically be dealing with references/pointers of objects that were created outside of the class scope.
+
+Though not the best example, a real world situation we can compare this to would be a folder system. Folder_a contains only original files, while folder_b contains only shortcuts to files. If we delete both these folders - in the instance of folder_a, the folder itself along with all its files will be removed(composition), whereas in folder_b, only the folder and the shortcuts within are removed, not the original files, they still exist somewhere in the system.(aggregation)
+
+An example of composition within my code for this weeks WS would be:
+	Composition: relationship between Restaurant class and Reservations class
+		class Restaurant {
+       			Reservation *m_reservations{ nullptr };
+       			size_t m_numOfRes{ 0 };
+			....
+
+	Aggregation: relationship between ConfirmSender and Reservation class
+		 class ConfirmationSender {
+        			const Reservation** m_reservations{ nullptr };
+        			size_t m_numOfRes{ 0 };
+			....

@@ -1,0 +1,11 @@
+Danny Lei - 164700197
+OOP345 - WS01
+05/30/21
+
+Through this workshop, I was able to learn and practice the concept of external/internal linkage with the use of extern and static keywords. 
+
+When we compile our programs, the compiler will take our implementation file, along with any header files we included in it and create what is called a translation unit. Internal linkage refers to an object or function within the translation unit that is only visible to the linker and the translation unit/ only visible within the scope of the translation unit. Unlike with internal linkage, objects/ functions that have external linkage will be accessible throughout our entire program - in short, this means that the linker will also be able to view and access these objects when processing other translation units.
+
+Examples of both external and internal linkage can be found within the code for this workshop. We used the static keyword for the counter  within the display() function which allows us to keep track of the counter for the entirety of the program - this would be an example of internal linkage. An example of external linkage would be the use of extern for our g_sysClock variable. We needed this variable to be extern because this will allow the other source files to "know" about this variable and freely use it.
+
+Some of the upgrades that were made to the event class from p.1 to p.2 would be that we will be dynamically storing the values for the cstr instead of statically - 'char cstr[128]' becomes 'char* cstr'. The destructor was also upgraded in order to deallocate any unfree memory at the end of use. One final upgrade would be the implementation of a 'reset' function which ended up being reuse many times within the code, and would also make future implementation of additional features easier.
