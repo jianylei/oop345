@@ -43,13 +43,12 @@ int main(int argc, char** argv)
 	theCollection.sort("length");
 	theCollection.display(std::cout);
 	printbar();
-/*
 
 	printHeader("The collection with fixed album names");
 	theCollection.cleanAlbum();
 	theCollection.display(std::cout);
 	printbar();
-
+/*
 	{
 		// looking for "The Beatles" in the collection
 		if (theCollection.inCollection("The Beatles"))

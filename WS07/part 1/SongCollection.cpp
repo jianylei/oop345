@@ -90,4 +90,10 @@ namespace sdds {
            });
        }
    }
+
+   void SongCollection::cleanAlbum() {
+       std::for_each(m_collection.begin(), m_collection.end(), [](Song &song) {
+           song.m_album = (song.m_album == "[None]")? "": song.m_album;
+       });
+   }
 }
