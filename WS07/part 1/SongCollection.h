@@ -6,6 +6,7 @@ I have done all the coding by myself and only copied the code that my professor 
 #ifndef SDDS_SONGCOLLECTION_H_
 #define SDDS_SONGCOLLECTION_H_
 #include <string>
+#include <vector>
 namespace sdds {
     struct Song {
         std::string m_artist;
@@ -16,5 +17,8 @@ namespace sdds {
         size_t m_length{ 0u };
     };
    
+   class SongCollection{
+       std::vector<Song> m_collection;
+   };
 }
 #endif
