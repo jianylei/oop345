@@ -6,6 +6,7 @@ I have done all the coding by myself and only copied the code that my professor 
 #ifndef SDDS_SONGCOLLECTION_H_
 #define SDDS_SONGCOLLECTION_H_
 #include <string>
+#include <list>
 #include <vector>
 namespace sdds {
     struct Song {
@@ -22,6 +23,10 @@ namespace sdds {
     public:
         SongCollection(const std::string);
         void display(std::ostream& out) const;
+        void sort();
+        void cleanAlbum();
+        bool inCollection() const;
+        std::list<Song> getSongsForArtist() const;
    };
 
    std::ostream& operator<<(std::ostream& out, const Song& theSong);
