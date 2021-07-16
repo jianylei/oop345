@@ -46,7 +46,7 @@ namespace sdds {
     }
 
    void SongCollection::display(std::ostream& out) const {
-       std::for_each(m_collection.begin(), m_collection.end(), [&out](const Song &songs){
+       std::for_each(m_collection.begin(), m_collection.end(), [&](const Song &songs){
            out << songs << std::endl;
        });
    }
@@ -57,7 +57,7 @@ namespace sdds {
        out << " | " << std::setw(20) << theSong.m_album;
        if(theSong.m_releaseYear) { out << " | " << std::setw(6) << std::right << theSong.m_releaseYear; }
        else { out << " | " << std::setw(6) << std::right << " "; }
-       if(theSong.m_length) { out << " | " << std::right << theSong.m_length; }
+       if(theSong.m_length) { out << " | " << std::right << (theSong.m_length % 3600)/60 << ':' << std::setw(2) << std::setfill('0') << theSong.m_length % 60 << std::setfill(' '); }
        else { out << " | " << " "; }
        if(theSong.m_price) { out << " | " << std::right << theSong.m_price << " |"; }
        else { out << " | " << " " << " |"; }
