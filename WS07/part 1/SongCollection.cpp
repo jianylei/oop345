@@ -6,6 +6,8 @@ I have done all the coding by myself and only copied the code that my professor 
 #include <fstream>
 #include <iomanip>
 #include <algorithm>
+#include <numeric>
+#include <iostream>
 #include "SongCollection.h"
 namespace sdds {
     SongCollection::SongCollection(const std::string fileName) {
@@ -46,9 +48,15 @@ namespace sdds {
     }
 
    void SongCollection::display(std::ostream& out) const {
+
        std::for_each(m_collection.begin(), m_collection.end(), [&](const Song &songs){
            out << songs << std::endl;
        });
+
+       size_t colllectionLength = std::accumulate(m_collection.begin(), m_collection.end(), 0u, [](const size_t &cnt, const Song &song) {
+           return cnt + song.m_length;
+       });
+       std::cout << "h: " << colllectionLength / 3600 << "m: " << (colllectionLength % 3600)/60 << "s: " << colllectionLength %60 << std::endl;
    }
 
    std::ostream& operator<<(std::ostream& out, const Song& theSong) {

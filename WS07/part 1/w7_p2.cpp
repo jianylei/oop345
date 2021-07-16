@@ -31,7 +31,7 @@ int main(int argc, char** argv)
 	printHeader("The original collection");
 	theCollection.display(std::cout);
 	printbar();
-
+/*
 	
 	printHeader("The collection sorted by title");
 	theCollection.sort("title");
@@ -71,5 +71,5 @@ int main(int argc, char** argv)
 			}
 			printbar();
 		}
-	}
+	}*/
 }
