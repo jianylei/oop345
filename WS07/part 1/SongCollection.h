@@ -12,13 +12,18 @@ namespace sdds {
         std::string m_artist;
         std::string m_song;
         std::string m_album;
-        double price{ 0 };
+        double m_price{ 0 };
         size_t m_releaseYear{ 0u };
         size_t m_length{ 0u };
     };
    
    class SongCollection{
        std::vector<Song> m_collection;
+    public:
+        SongCollection(const std::string);
+        void display(std::ostream& out) const;
    };
+
+   std::ostream& operator<<(std::ostream& out, const Song& theSong);
 }
 #endif
