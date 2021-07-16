@@ -4,7 +4,7 @@ Danny Lei - 164700197
 I have done all the coding by myself and only copied the code that my professor provided to complete my workshops and assignments.
 */
 #include <fstream>
-#include <iostream>
+#include <iomanip>
 #include <algorithm>
 #include "SongCollection.h"
 namespace sdds {
@@ -30,8 +30,16 @@ namespace sdds {
                 }catch(...) {
                     song.m_releaseYear = 0;
                 }
-                song.m_length = stoi(tmp.substr(80,5));
-                song.m_price = stod(tmp.substr(85,5));
+                try{
+                    song.m_length = stoi(tmp.substr(80,5));
+                }catch(...) {
+                    song.m_length = 0;
+                }
+                try{
+                    song.m_price = stod(tmp.substr(85,5));
+                }catch(...) {
+                    song.m_price = 0;
+                }               
                 m_collection.push_back(song);
             }
         }
@@ -44,7 +52,16 @@ namespace sdds {
    }
 
    std::ostream& operator<<(std::ostream& out, const Song& theSong) {
-       out <<"helllo";
+       out << "| " << std::setw(20) << std::left << theSong.m_song;
+       out << " | " << std::setw(15) << theSong.m_artist;
+       out << " | " << std::setw(20) << theSong.m_album;
+       if(theSong.m_releaseYear) { out << " | " << std::setw(6) << std::right << theSong.m_releaseYear; }
+       else { out << " | " << std::setw(6) << std::right << " "; }
+       if(theSong.m_length) { out << " | " << std::right << theSong.m_length; }
+       else { out << " | " << " "; }
+       if(theSong.m_price) { out << " | " << std::right << theSong.m_price << " |"; }
+       else { out << " | " << " " << " |"; }
+
        return out;
    }
 }
