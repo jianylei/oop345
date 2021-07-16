@@ -72,4 +72,22 @@ namespace sdds {
 
        return out;
    }
+
+   void SongCollection::sort(const std::string str) {
+       if(str == "title") {
+           std::sort(m_collection.begin(), m_collection.end(), [](const Song &s1, const Song &s2) {
+               return s1.m_song < s2.m_song;
+           });
+       }
+       else if(str == "album") {
+           std::sort(m_collection.begin(), m_collection.end(), [](const Song &s1, const Song &s2) {
+               return s1.m_album < s2.m_album;
+           });
+       }
+       else if(str == "length") {
+           std::sort(m_collection.begin(), m_collection.end(), [](const Song &s1, const Song &s2) {
+               return s1.m_length < s2.m_length;
+           });
+       }
+   }
 }

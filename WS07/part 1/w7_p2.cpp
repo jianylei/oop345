@@ -31,7 +31,7 @@ int main(int argc, char** argv)
 	printHeader("The original collection");
 	theCollection.display(std::cout);
 	printbar();
-/*
+
 	
 	printHeader("The collection sorted by title");
 	theCollection.sort("title");
@@ -43,7 +43,7 @@ int main(int argc, char** argv)
 	theCollection.sort("length");
 	theCollection.display(std::cout);
 	printbar();
-
+/*
 
 	printHeader("The collection with fixed album names");
 	theCollection.cleanAlbum();

@@ -23,7 +23,7 @@ namespace sdds {
     public:
         SongCollection(const std::string);
         void display(std::ostream& out) const;
-        void sort();
+        void sort(const std::string);
         void cleanAlbum();
         bool inCollection() const;
         std::list<Song> getSongsForArtist() const;
