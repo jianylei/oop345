@@ -7,7 +7,7 @@ I have done all the coding by myself and only copied the code that my professor 
 #include <iomanip>
 #include <algorithm>
 #include <numeric>
-#include <iostream>
+#include <list>
 #include "SongCollection.h"
 namespace sdds {
     SongCollection::SongCollection(const std::string fileName) {
@@ -56,7 +56,7 @@ namespace sdds {
        size_t colllectionLength = std::accumulate(m_collection.begin(), m_collection.end(), 0u, [](const size_t &cnt, const Song &song) {
            return cnt + song.m_length;
        });
-       std::cout << "h: " << colllectionLength / 3600 << "m: " << (colllectionLength % 3600)/60 << "s: " << colllectionLength %60 << std::endl;
+       out << "h: " << colllectionLength / 3600 << "m: " << (colllectionLength % 3600)/60 << "s: " << colllectionLength %60 << std::endl;
    }
 
    std::ostream& operator<<(std::ostream& out, const Song& theSong) {
@@ -95,5 +95,23 @@ namespace sdds {
        std::for_each(m_collection.begin(), m_collection.end(), [](Song &song) {
            song.m_album = (song.m_album == "[None]")? "": song.m_album;
        });
+   }
+
+   bool SongCollection::inCollection(const std::string str) const {
+       return std::any_of(m_collection.begin(), m_collection.end(), [&str](const Song &song) {
+           return song.m_artist == str;
+       });
+   }
+
+   std::list<Song> SongCollection::getSongsForArtist(const std::string str) const {
+       int noOfSongs = std::count_if(m_collection.begin(), m_collection.end(), [&str](const Song &song) {
+           return song.m_artist == str;
+       });
+       std::list<Song> listofSongs(noOfSongs);
+
+       std::copy_if(m_collection.begin(), m_collection.end(), listofSongs.begin(), [&str](const Song &song) {
+           return song.m_artist == str;
+       });
+       return listofSongs;
    }
 }

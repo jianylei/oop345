@@ -48,7 +48,7 @@ int main(int argc, char** argv)
 	theCollection.cleanAlbum();
 	theCollection.display(std::cout);
 	printbar();
-/*
+
 	{
 		// looking for "The Beatles" in the collection
 		if (theCollection.inCollection("The Beatles"))
@@ -70,5 +70,5 @@ int main(int argc, char** argv)
 			}
 			printbar();
 		}
-	}*/
+	}
 }

@@ -25,8 +25,8 @@ namespace sdds {
         void display(std::ostream& out) const;
         void sort(const std::string);
         void cleanAlbum();
-        bool inCollection() const;
-        std::list<Song> getSongsForArtist() const;
+        bool inCollection(const std::string) const;
+        std::list<Song> getSongsForArtist(const std::string) const;
    };
 
    std::ostream& operator<<(std::ostream& out, const Song& theSong);
