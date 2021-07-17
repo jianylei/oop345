@@ -46,4 +46,8 @@ namespace sdds {
         }
         return moved;
     }
+
+    void Workstation::setNextStation(Workstation* station) {
+        m_pNextStation = station;
+    }
 }
