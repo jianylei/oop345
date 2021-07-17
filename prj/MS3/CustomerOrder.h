@@ -22,6 +22,7 @@ namespace sdds {
 	        Item(const std::string& src) : m_itemName(src) {};
         }** m_lstItem { nullptr };
         static size_t m_widthField;
+        void itemClear();
     public:
         CustomerOrder(){};
         CustomerOrder(const std::string&);
@@ -36,7 +37,6 @@ namespace sdds {
         bool isItemFilled(const std::string& itemName) const;
         void fillItem(Station& station, std::ostream& os);
         void display(std::ostream& os) const;
-        void itemClear();
     };
 }
 #endif
