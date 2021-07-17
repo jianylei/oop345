@@ -56,7 +56,8 @@ namespace sdds {
        size_t colllectionLength = std::accumulate(m_collection.begin(), m_collection.end(), 0u, [](const size_t &cnt, const Song &song) {
            return cnt + song.m_length;
        });
-       out << "h: " << colllectionLength / 3600 << "m: " << (colllectionLength % 3600)/60 << "s: " << colllectionLength %60 << std::endl;
+       out << std::setw(88) << std::setfill('-') << "\n" << std::setfill(' ');
+       out << "| " << std::setw(77) << std::right << "Total Listening Time: " << colllectionLength / 3600 << ":" << (colllectionLength % 3600)/60 << ":" << colllectionLength %60 << " |" << std::endl;
    }
 
    std::ostream& operator<<(std::ostream& out, const Song& theSong) {
