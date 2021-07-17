@@ -21,7 +21,7 @@ namespace sdds {
         bool moved = false;
 
         if(!m_orders.empty()) {
-            if(m_orders.front().isItemFilled(Station::getItemName())) {
+            if(m_orders.front().isItemFilled(getItemName())) {
                 if(m_pNextStation) {
                     m_pNextStation->m_orders.push_back(std::move(m_orders.front()));
                     m_orders.pop_front();
@@ -32,7 +32,7 @@ namespace sdds {
                 }
                 moved = true;
             }
-            else if(!Station::getQuantity) {
+            else if(!getQuantity) {
                  if(m_pNextStation) {
                     m_pNextStation->m_orders.push_back(std::move(m_orders.front()));
                     m_orders.pop_front();
@@ -49,5 +49,19 @@ namespace sdds {
 
     void Workstation::setNextStation(Workstation* station) {
         m_pNextStation = station;
+    }
+
+    Workstation* Workstation::getNextStation() const {
+        return m_pNextStation;
+    }
+
+    void Workstation::display(std::ostream& os) const {
+        if(m_pNextStation) {
+            os << getItemName() << " --> " << m_pNextStation->getItemName();
+        }
+        else {
+            os << getItemName() << " --> END OF LINE";
+        }
+        os << endl;
     }
 }
