@@ -93,24 +93,25 @@ namespace sdds {
    }
 
    void SongCollection::cleanAlbum() {
-       std::for_each(m_collection.begin(), m_collection.end(), [](Song &song) {
+       std::transform(m_collection.begin(), m_collection.end(), m_collection.begin(), [](Song &song) {
            song.m_album = (song.m_album == "[None]")? "": song.m_album;
+           return song;
        });
    }
 
    bool SongCollection::inCollection(const std::string str) const {
-       return std::any_of(m_collection.begin(), m_collection.end(), [&str](const Song &song) {
+       return std::any_of(m_collection.begin(), m_collection.end(), [str](const Song &song) {
            return song.m_artist == str;
        });
    }
 
    std::list<Song> SongCollection::getSongsForArtist(const std::string str) const {
-       int noOfSongs = std::count_if(m_collection.begin(), m_collection.end(), [&str](const Song &song) {
+       int noOfSongs = std::count_if(m_collection.begin(), m_collection.end(), [str](const Song &song) {
            return song.m_artist == str;
        });
        std::list<Song> listofSongs(noOfSongs);
 
-       std::copy_if(m_collection.begin(), m_collection.end(), listofSongs.begin(), [&str](const Song &song) {
+       std::copy_if(m_collection.begin(), m_collection.end(), listofSongs.begin(), [str](const Song &song) {
            return song.m_artist == str;
        });
        return listofSongs;
