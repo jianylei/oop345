@@ -45,8 +45,8 @@ namespace sdds {
 
 	struct Product {
 		std::string m_desc{};
-		double m_price{};
-		int m_id{};
+		double m_price{ 0 };
+		int m_id{ 0 };
 		static size_t idGenerator;
 		// this variable is used to print trace messages from
 		//     constructors/destructor
@@ -83,7 +83,7 @@ namespace sdds {
 
 		void validate() {
 			if(m_price < 0) {
-				throw "*** Negative prices are invalid ***";
+				throw std::string("*** Negative prices are invalid ***");
 			}
 		}
 

@@ -31,8 +31,9 @@ namespace sdds {
 		size_t size() const { return list.size(); }
 		const T& operator[](size_t i) const { return list[i]; }
 
-		// TODO: Overload the += operator with a raw pointer
-		//       as a second operand.
+		void operator+=(const T* obj){
+			list.push_back(*obj);
+		}
 
 		void display(std::ostream& os) const {
             os << std::fixed << std::setprecision(2);

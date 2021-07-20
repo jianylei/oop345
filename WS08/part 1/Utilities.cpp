@@ -16,7 +16,6 @@ namespace sdds {
 		//         using raw pointers
 
 
-
 		return priceList;
 	}
 }
