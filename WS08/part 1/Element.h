@@ -81,7 +81,11 @@ namespace sdds {
 				std::cout << "    ~D [" << m_id << "]" << std::endl;
 		}
 
-		// TODO: add a function here to validate the price
+		void validate() {
+			if(m_price < 0) {
+				throw "*** Negative prices are invalid ***";
+			}
+		}
 
 		void display(std::ostream& os) const {
 			os << std::setw(FWD) << m_desc
