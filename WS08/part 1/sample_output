@@ -37,9 +37,31 @@ ERROR: *** Negative prices are invalid ***
 NOTE: An exception occurred while creating the list of products!
       You should notice that not all objects are deleted.
 
+********************************************
+* Merging bad prices using Smart Pointers
+********************************************
+     C [4]
+    CC [5] from [4]
+    ~D [4]
+     C [6]
+    ~D [6]
+    ~D [5]
+ERROR: *** Negative prices are invalid ***
+NOTE: An exception occurred while creating the list of products!
+      You should notice that ALL objects are deleted.
+
 
 ********************************************
 * Merging good prices using Raw Pointers
+********************************************
+ Description   Price
+   cucumbers    1.99
+     brocoli    2.49
+      lemons    0.99
+     oranges    0.67
+
+********************************************
+* Merging good prices using Smart Pointers
 ********************************************
  Description   Price
    cucumbers    1.99
