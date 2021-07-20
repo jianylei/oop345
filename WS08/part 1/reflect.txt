@@ -1,0 +1,32 @@
+Danny Lei - 164700197
+OOP345 - WS7
+07/16/21
+
+Through this workshop, I was able to experiment with the use of vectors, list and also different STL functions, thus deepening my understanding of these concepts.
+STL functions I used within this workshop include:
+-for_each(I, I, fn) - used to iterate through vector applying the function passed through the 		
+     	parameter. This was useful for this workshop as we needed to display every item within the vector.
+	ex:
+		std::for_each(m_collection.begin(), m_collection.end(), [&](const Song &songs){
+           		out << songs << std::endl;
+      		 });
+
+-sort(I, I, fn) - used to sort through the vector using fn to compare the two elements
+-any_of(I, I, fn) - used to search through the vector to find any occurrence matching the string 
+	passed as parameter.
+-count_if(I, I, fn) - used to count how many items match the string in parameter so we can determine
+	 the size of our list.
+-copy_if(I, I, x, fn) - used to copy the contents of I into x if they match the condition in fn
+    ex:
+        std::copy_if(m_collection.begin(), m_collection.end(), listofSongs.begin(), [&str](const Song &song) {
+           return song.m_artist == str;
+       });
+-transform(i, i, x, fn) - apply fn to elements of i to "transform" them, storing the results in x, alternatively we could of used for_each instead
+
+Using STL functions vs self implementation with loops comes with many advantages such as:
+-Much easier and much easier to maintain code with the used of functors/ lambdas
+-STL functions are designed to work efficiently
+-less prone to errors
+-implementation time
+
+Since the sort() function can cause errors if the user inputs an invalid string into the parameter, I would redesign the function by implementing error handlers to throw a msg letting user know the input was invalid and to try again. This would stop the compiler from detecting any errors in relation to that issue, preventing any crashes from happening.
