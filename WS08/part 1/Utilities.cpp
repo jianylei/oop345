@@ -1,5 +1,6 @@
 // Workshop 8 - Smart Pointers
 // 2019/11 - Cornel
+// 2021/07 - Danny Lei
 
 
 #include <memory>
