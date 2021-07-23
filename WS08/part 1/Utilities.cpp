@@ -21,11 +21,11 @@ namespace sdds {
 					try{
 						p->validate();	
 						priceList += p;
-					} catch(...) {
+					} catch(std::string &err) {
 						p->Trace = false;
 						delete p;
 						p->Trace = true;
-						throw std::string("*** Negative prices are invalid ***");
+						throw err;
 					}
 					delete p;
 				}
