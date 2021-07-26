@@ -2,7 +2,6 @@
 // 2019/11 - Cornel
 // 2021/07 - Danny Lei
 
-
 #include <memory>
 #include <algorithm>
 #include "List.h"

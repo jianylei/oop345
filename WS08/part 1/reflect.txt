@@ -1,32 +1,26 @@
 Danny Lei - 164700197
-OOP345 - WS7
-07/16/21
+OOP345 - WS8
+07/25/21
 
-Through this workshop, I was able to experiment with the use of vectors, list and also different STL functions, thus deepening my understanding of these concepts.
-STL functions I used within this workshop include:
--for_each(I, I, fn) - used to iterate through vector applying the function passed through the 		
-     	parameter. This was useful for this workshop as we needed to display every item within the vector.
-	ex:
-		std::for_each(m_collection.begin(), m_collection.end(), [&](const Song &songs){
-           		out << songs << std::endl;
-      		 });
+Through this weeks workshop, we learned and incorporated smart pointers into our program. The main advantage of using smart pointers compared to raw pointers is that it automatically helps us manage memory in terms of deallocating it during the pointers destruction.
+EX.
+	Utilities::mergeRaw(...):
+		Product *p = new Product(desc[i].desc, price[j].price);	<--- creates object through new
 
--sort(I, I, fn) - used to sort through the vector using fn to compare the two elements
--any_of(I, I, fn) - used to search through the vector to find any occurrence matching the string 
-	passed as parameter.
--count_if(I, I, fn) - used to count how many items match the string in parameter so we can determine
-	 the size of our list.
--copy_if(I, I, x, fn) - used to copy the contents of I into x if they match the condition in fn
-    ex:
-        std::copy_if(m_collection.begin(), m_collection.end(), listofSongs.begin(), [&str](const Song &song) {
-           return song.m_artist == str;
-       });
--transform(i, i, x, fn) - apply fn to elements of i to "transform" them, storing the results in x, alternatively we could of used for_each instead
+		p->validate();	
+		priceList += p;
 
-Using STL functions vs self implementation with loops comes with many advantages such as:
--Much easier and much easier to maintain code with the used of functors/ lambdas
--STL functions are designed to work efficiently
--less prone to errors
--implementation time
+		delete p;	<--- deallocation of object after use
 
-Since the sort() function can cause errors if the user inputs an invalid string into the parameter, I would redesign the function by implementing error handlers to throw a msg letting user know the input was invalid and to try again. This would stop the compiler from detecting any errors in relation to that issue, preventing any crashes from happening.
+		<end of scope>
+
+	Utilities::mergeSmart(...):
+		std::unique_ptr<Product> p(new Product(desc[i].desc, price[j].price));	<---creation of object through new; wrapped in smart pointer
+
+		p->validate();
+		priceList += p;
+
+		<end of scope>	<--- no manual deallocation needed as it is handled by unique_ptr
+
+The main difference between dealing with raw and smart pointers in the workshop came from the deallocation of memory - as it is handled automatically in regards to smart pointers but for raw pointers, it would need to be done manually. Another difference would be that of creation of the objects as with the raw pointer we just use 'new' as we have been doing so far this semester - but to use it with a smart pointer, we would also need to wrap it in either a unique_ptr, shared_ptr or custom made smart pointer. Any other functions that handle the pointer would also need to be overloaded to handle a smart pointer - in the case of our workshop, the += operator was to be overloaded in order to accept a smart pointer as parameter.
+ex: void operator+=(const std::unique_ptr<T> &obj)
