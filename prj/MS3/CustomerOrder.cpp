@@ -82,7 +82,7 @@ namespace sdds {
                 }
                 else {
                     inStock = false;
-                    os << "Unable to fill ";
+                    os << "    Unable to fill ";
                 }
                 os << m_name << ", " << m_product << " [" << m_lstItem[i]->m_itemName << "]" << std::endl;
             }

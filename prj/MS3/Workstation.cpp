@@ -56,7 +56,7 @@ namespace sdds {
             os << getItemName() << " --> " << m_pNextStation->getItemName();
         }
         else {
-            os << getItemName() << " --> END OF LINE";
+            os << getItemName() << " --> End of Line";
         }
         os << std::endl;
     }
