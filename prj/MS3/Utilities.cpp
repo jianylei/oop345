@@ -18,27 +18,23 @@ namespace sdds {
         return m_widthField;
     }
 
-    std::string Utilities::extractToken(const std::string& str, size_t& next_pos, bool& more){
-        std::string strExtracted = str.substr(next_pos);
-        size_t pos = strExtracted.find(m_delimiter);
-        if(pos != std::string::npos) {
-            strExtracted = strExtracted.substr(0, pos++);
-            next_pos += pos;
 
-            if(strExtracted.empty()) {
-                more = false;
-                throw "There is not any token between delimiters";
-            }
-            else {
-                more = true;
-            }
+    std::string Utilities::extractToken(const std::string& str, size_t& next_pos, bool& more){
+        std::string strExtracted{};
+        if (m_delimiter == str.at(next_pos)) {
+            more = false;
+            throw "There is not any token between delimiters";
         }
-        else {
+        size_t pos = str.find(m_delimiter,next_pos);
+        if (pos == std::string::npos) {
             more = false;
         }
-        if(strExtracted.length() > m_widthField) {
-                setFieldWidth(strExtracted.length());
-            }
+        strExtracted = str.substr(next_pos, pos - next_pos);
+        next_pos = pos + 1;
+        if (strExtracted.length() > m_widthField) {
+            setFieldWidth(strExtracted.length());
+        }
+
         return strExtracted;
     }
 

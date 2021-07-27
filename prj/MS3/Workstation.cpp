@@ -5,7 +5,8 @@
 //
 // I confirm that I am the only author of this file
 //   and the content was created entirely by me.
-#include <<utility>>
+#include <utility>
+#include <iostream>
 #include "Workstation.h"
 
 namespace sdds {  
@@ -32,7 +33,7 @@ namespace sdds {
                 }
                 moved = true;
             }
-            else if(!getQuantity) {
+            else if(!getQuantity()) {
                  if(m_pNextStation) {
                     *m_pNextStation += std::move(m_orders.front());
                     m_orders.pop_front();
@@ -62,7 +63,7 @@ namespace sdds {
         else {
             os << getItemName() << " --> END OF LINE";
         }
-        os << endl;
+        os << std::endl;
     }
 
     Workstation& Workstation::operator+=(CustomerOrder&& newOrder) {
