@@ -20,27 +20,22 @@ namespace sdds {
 
     bool Workstation::attemptToMoveOrder(){
         bool moved = false;
-
         if(!m_orders.empty()) {
-            if(m_orders.front().isItemFilled(getItemName())) {
+    
+            if(m_orders.front().isItemFilled(getItemName()) || getQuantity()==0) {
                 if(m_pNextStation) {
                     *m_pNextStation += std::move(m_orders.front());
                     m_orders.pop_front();
                 }
                 else{
-                    completed.push_back(std::move(m_orders.front()));
-                    m_orders.pop_front();
-                }
-                moved = true;
-            }
-            else if(!getQuantity()) {
-                 if(m_pNextStation) {
-                    *m_pNextStation += std::move(m_orders.front());
-                    m_orders.pop_front();
-                }
-                else{
-                    incomplete.push_back(std::move(m_orders.front()));
-                    m_orders.pop_front();
+                    if(m_orders.front().isFilled()) {
+                        completed.push_back(std::move(m_orders.front()));
+                        m_orders.pop_front();
+                    }
+                    else {
+                        incomplete.push_back(std::move(m_orders.front()));
+                        m_orders.pop_front();
+                    }
                 }
                 moved = true;
             }

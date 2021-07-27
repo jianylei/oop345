@@ -75,13 +75,12 @@ int main(int argc, char** argv)
 		cout << endl << endl;
 
 		loadFromFile<CustomerOrder>(argv[3], theOrders);
-std::cout << "dddddd";
 		cout << "========================================" << endl;
 		cout << "=                Orders                =" << endl;
 		cout << "========================================" << endl;
 		for (auto& order : theOrders) {
 			order.display(std::cout);
-			pending.push_back(std::move(order));std::cout << "ooooo";
+			pending.push_back(std::move(order));
 		}
 		cout << endl << endl;
 		cout << "========================================" << endl;
