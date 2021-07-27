@@ -85,11 +85,11 @@ namespace sdds {
 
         if(completed.size() + incomplete.size() == m_cntCustomerOrder) { flag = true; }
         return flag;
-   }
+    }
 
-   void LineManager::display(std::ostream& os) const {
-       for_each(activeLine.begin(), activeLine.end(), [&os](Workstation* station){
-           station->display(os);
-       });
-   }
+    void LineManager::display(std::ostream& os) const {
+        for_each(activeLine.begin(), activeLine.end(), [&os](Workstation* station){
+            station->display(os);
+        });
+    }
 }
