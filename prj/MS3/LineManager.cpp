@@ -6,7 +6,6 @@
 // I confirm that I am the only author of this file
 //   and the content was created entirely by me.
 #include <fstream>
-#include <iostream> //remove after debug
 #include <algorithm>
 #include "Utilities.h"
 #include "LineManager.h"
@@ -46,7 +45,6 @@ namespace sdds {
                 bool tmp = true;
 
                 if (ws2->getNextStation() != nullptr) {
-                    std::cout << ws2->getNextStation()->getItemName() << i << std::endl;
                     tmp = false;
                     if (ws2->getNextStation()->getItemName() != ws1->getItemName()) {
                         tmp = true;
@@ -57,40 +55,35 @@ namespace sdds {
         });
 
         m_firstStation = station;
-        std::cout << "first ";
-        m_firstStation->display(std::cout);
         m_cntCustomerOrder = pending.size();
     }
 
    void LineManager::linkStations() {
-       std::vector <Workstation*> tmpLine;
+       std::vector <Workstation*> station;
        Workstation* tmpStation = m_firstStation;
 
        do {
-           tmpLine.push_back(tmpStation);
+           station.push_back(tmpStation);
            tmpStation = tmpStation->getNextStation();
        }while(tmpStation != nullptr);
-       activeLine = tmpLine;
+       activeLine = station;
    }
 
    bool LineManager::run(std::ostream& os) {
        static size_t run_count{ 0u };
        bool flag = false;
 
-       os << "Line Manager Iteration: " << run_count++ << std::endl;
+       os << "Line Manager Iteration: " << ++run_count << std::endl;
 
        if(!pending.empty()) {
            *m_firstStation += std::move(pending.front());
+           pending.pop_front();
        }
 
-       for_each(activeLine.begin(), activeLine.end(), [&os](Workstation* station){
-           station->fill(os);
-           station->attemptToMoveOrder();
-       });
+       for_each(activeLine.begin(), activeLine.end(), [&os](Workstation* station){ station->fill(os); });
+       for_each(activeLine.begin(), activeLine.end(), [](Workstation* station){ station->attemptToMoveOrder(); });
 
-       if(completed.size() + incomplete.size() == m_cntCustomerOrder) {
-           flag = true;
-       }
+       if(completed.size() + incomplete.size() == m_cntCustomerOrder) { flag = true; }
        return flag;
    }
 
