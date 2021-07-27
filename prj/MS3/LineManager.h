@@ -20,6 +20,5 @@ namespace sdds {
         bool run(std::ostream& os);
         void display(std::ostream& os) const;
     };
-   
 }
 #endif

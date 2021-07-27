@@ -43,11 +43,7 @@ namespace sdds {
     }
 
     void Station::updateQuantity() {
-        //m_noOfItems = (--m_noOfItems >= 0)? m_noOfItems: 0;
-        m_noOfItems--;
-        if (m_noOfItems < 0) {
-            m_noOfItems = 0;
-        }
+        m_noOfItems = (--m_noOfItems < 0)? 0: m_noOfItems;
     }
 
     void Station::display(std::ostream& os, bool full) const {

@@ -18,7 +18,6 @@ namespace sdds {
         return m_widthField;
     }
 
-
     std::string Utilities::extractToken(const std::string& str, size_t& next_pos, bool& more){
         std::string strExtracted{};
         if (m_delimiter == str.at(next_pos)) {
@@ -34,7 +33,6 @@ namespace sdds {
         if (strExtracted.length() > m_widthField) {
             setFieldWidth(strExtracted.length());
         }
-
         return strExtracted;
     }
 

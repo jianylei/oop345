@@ -11,36 +11,35 @@
 #include "LineManager.h"
 namespace sdds {
     LineManager::LineManager(const std::string &file, const std::vector<Workstation *> &stations) {
-        Utilities utils;
-        size_t pos = 0;
-        size_t idx = 0;
-        std::string line;
-        std::string str;
-        bool more = true;
-
-        std::ifstream openedFile(file);
+        std::ifstream openedFile(file);     //throw err msg if file cannot be opened
         if (!openedFile) {
             throw "File could not be opended";
         }
-        while (!openedFile.eof()) {
-            more = true;
-            std::getline(openedFile, line);
-            str = utils.extractToken(line, pos, more);
-            auto station = std::find_if(stations.begin(), stations.end(), [&](Workstation *ws) { 
-                return (ws->getItemName() == str); 
-            });
-            activeLine.push_back(*station);
-            if (more) {
+
+        size_t pos = 0;
+        std::string line;
+        std::string str;
+        Workstation *currentStation;
+        Workstation *nextStation;
+        Workstation *firstStation;
+        Utilities utils;
+
+        while (std::getline(openedFile, line)) {
+            bool more = true;
+            
+            str = utils.extractToken(line, pos, more);    
+            currentStation = *std::find_if(stations.begin(), stations.end(), [&](Workstation *ws) { return (ws->getItemName() == str); });
+
+            if (more) {     
                 str = utils.extractToken(line, pos, more);
-                station = std::find_if(stations.begin(), stations.end(), [&](Workstation *ws)
-                                       { return (ws->getItemName() == str); });
-                activeLine[idx]->setNextStation(*station);
+                nextStation = *std::find_if(stations.begin(), stations.end(), [&](Workstation *ws) { return (ws->getItemName() == str); });                   
+                currentStation->setNextStation(nextStation);
             }
-            idx++;
+            activeLine.push_back(currentStation);
         }
 
-        Workstation *station;
-        station = *std::find_if(activeLine.begin(), activeLine.end(), [&](Workstation *ws1) {
+        //find first link to list
+        firstStation = *std::find_if(activeLine.begin(), activeLine.end(), [&](Workstation *ws1) {
             return std::all_of(activeLine.begin(), activeLine.end(), [&](Workstation *ws2) {
                 bool tmp = true;
 
@@ -54,37 +53,38 @@ namespace sdds {
             });
         });
 
-        m_firstStation = station;
+        m_firstStation = firstStation;
         m_cntCustomerOrder = pending.size();
     }
 
-   void LineManager::linkStations() {
-       std::vector <Workstation*> station;
-       Workstation* tmpStation = m_firstStation;
+    //sort stations from first to last
+    void LineManager::linkStations() {
+        std::vector <Workstation*> station;
+        Workstation* tmpStation = m_firstStation;
 
-       do {
-           station.push_back(tmpStation);
-           tmpStation = tmpStation->getNextStation();
-       }while(tmpStation != nullptr);
-       activeLine = station;
-   }
+        do {
+            station.push_back(tmpStation);
+            tmpStation = tmpStation->getNextStation();
+        }while(tmpStation != nullptr);
+        activeLine = station;
+    }
 
-   bool LineManager::run(std::ostream& os) {
-       static size_t run_count{ 0u };
-       bool flag = false;
+    bool LineManager::run(std::ostream& os) {
+        static size_t run_count{ 0u };
+        bool flag = false;
 
-       os << "Line Manager Iteration: " << ++run_count << std::endl;
+        os << "Line Manager Iteration: " << ++run_count << std::endl;
 
-       if(!pending.empty()) {
-           *m_firstStation += std::move(pending.front());
-           pending.pop_front();
-       }
+        if(!pending.empty()) {
+            *m_firstStation += std::move(pending.front());
+            pending.pop_front();
+        }
 
-       for_each(activeLine.begin(), activeLine.end(), [&os](Workstation* station){ station->fill(os); });
-       for_each(activeLine.begin(), activeLine.end(), [](Workstation* station){ station->attemptToMoveOrder(); });
+        for_each(activeLine.begin(), activeLine.end(), [&os](Workstation* station){ station->fill(os); });
+        for_each(activeLine.begin(), activeLine.end(), [](Workstation* station){ station->attemptToMoveOrder(); });
 
-       if(completed.size() + incomplete.size() == m_cntCustomerOrder) { flag = true; }
-       return flag;
+        if(completed.size() + incomplete.size() == m_cntCustomerOrder) { flag = true; }
+        return flag;
    }
 
    void LineManager::display(std::ostream& os) const {
