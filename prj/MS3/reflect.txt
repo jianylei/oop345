@@ -1,1 +1,9 @@
-tmp
+Danny Lei - 164700197
+OOP345 - Final Project - MS3
+07/23/21
+
+Through working on this project, I was able to further my understanding of the concepts in OOP345 by incorporating them into the project. Some of these concepts include (but not limiting to) working with different types, class relationships, lambda/functors, error handling, STL, file streams, rule of five, and even getting to implement our own linked list(Workstation). Though it was hard having to switch between the different modules and to "connect the dots" on how they interact with one another - the first two milestone were still pretty simple, but ms3 ended up giving me a harder time, most notably due to the logic behind the Workstation::attemptToMove() function and LineManager constructor. After writing a proper pseudo code and drawing out how different object scenarios would interact with the function/constructor along with a bit of testing, I was able to properly implement the two.
+
+I thoroughly enjoyed this semester and the topics that were covered - especially the different types of algorithms. I also enjoyed that a lot of the workshops were tough and that some of the instructions on them were up to interpretation - challenging us to do research outside of what was being taught. 
+
+Thank you to both Chris and Hossein for the job they did in teaching, especially considering the conditions of having to do it online.

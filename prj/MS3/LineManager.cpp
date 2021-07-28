@@ -41,15 +41,12 @@ namespace sdds {
         //find first link to list
         firstStation = *std::find_if(activeLine.begin(), activeLine.end(), [&](Workstation *ws1) {
             return std::all_of(activeLine.begin(), activeLine.end(), [&](Workstation *ws2) {
-                bool tmp = true;
+                bool flag = true;
 
-                if (ws2->getNextStation() != nullptr) {
-                    tmp = false;
-                    if (ws2->getNextStation()->getItemName() != ws1->getItemName()) {
-                        tmp = true;
-                    }
+                if (ws2->getNextStation() != nullptr && ws2->getNextStation()->getItemName() == ws1->getItemName()) {
+                    flag = false;
                 }
-                return tmp;
+                return flag;
             });
         });
 
